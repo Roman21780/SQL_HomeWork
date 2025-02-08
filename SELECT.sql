@@ -21,9 +21,9 @@ FROM artist
 WHERE name NOT LIKE '% %';
 
 --Название треков, которые содержат слово «мой» или «my».
-SELECT title 
+SELECT DISTINCT title 
 FROM track
-WHERE lower(title) LIKE '%мой%' OR lower(title) LIKE '%my%';
+WHERE lower(title) ~* '\mмой\M' OR lower(title) ~* '\mmy\M';
 
 -- Задание 3
 --Количество исполнителей в каждом жанре.
@@ -70,8 +70,19 @@ SELECT a.title
 FROM album a
 JOIN album_artist aa ON a.id = aa.album_id 
 JOIN artist_genre ag ON aa.artist_id  = ag.artist_id 
-GROUP BY a.id
+GROUP BY a.id, aa.artist_id
 HAVING count(DISTINCT ag.genre_id ) > 1;
+
+-- второй вариант - с подзапросом:
+SELECT DISTINCT a.title
+FROM album a 
+JOIN album_artist aa ON a.id = aa.album_id 
+WHERE aa.artist_id IN (
+	SELECT ag.artist_id
+	FROM artist_genre ag 
+	GROUP BY ag.artist_id
+	HAVING count(DISTINCT ag.genre_id) > 1
+);
 
 --Наименования треков, которые не входят в сборники.
 SELECT t.title

@@ -24,7 +24,18 @@ INSERT INTO track (title, duration, album_id) VALUES
 ('Stan', '00:06:44', 3),
 ('The Real Slim Shady', '00:04:44', 3),
 ('What a Wonderful World', '00:02:19', 4),
-('Hello Dolly', '00:02:27', 4);
+('Hello Dolly', '00:02:27', 4),
+('my own', '00:02:28', 1),
+('own my', '00:03:27', 3),
+('my', '00:04:27', 4),
+('oh my god', '00:05:27', 2),
+('myself', '00:02:37', 2),
+('by myself', '00:02:47', 4),
+('bemy self', '00:02:57', 4),
+('myself by', '00:02:17', 3),
+('by myself by', '00:02:39', 3),
+('beemy', '00:02:39', 1),
+('premyne', '00:02:39', 2);
 
 INSERT INTO  compilation (title, release_year) VALUES 
 ('Greatest Hits of the 70s', 2000),
@@ -37,6 +48,9 @@ INSERT INTO artist_genre (artist_id, genre_id) VALUES
 (2, 2), -- Michael Jackson -> Pop
 (3, 3), -- Eminem -> Hip-Hop
 (4, 4); -- Louis Armstrong -> Jazz
+
+INSERT INTO artist_genre (artist_id, genre_id) VALUES (1, 2)
+ON CONFLICT (artist_id, genre_id) DO NOTHING;
 
 INSERT INTO album_artist (album_id, artist_id) VALUES
 (1, 1), -- A Night at the Opera -> Queen
