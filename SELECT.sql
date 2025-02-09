@@ -23,7 +23,7 @@ WHERE name NOT LIKE '% %';
 --Название треков, которые содержат слово «мой» или «my».
 SELECT DISTINCT title 
 FROM track
-WHERE lower(title) ~* '\mмой\M' OR lower(title) ~* '\mmy\M';
+WHERE title ~* '\m(мой|my)\M';
 
 -- Задание 3
 --Количество исполнителей в каждом жанре.
